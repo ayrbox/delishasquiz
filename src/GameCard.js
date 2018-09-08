@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import classnames from "classnames";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
+import { requestHelloWorld } from "./actions";
 
 class GameCard extends Component {
   constructor(props) {
@@ -19,6 +23,8 @@ class GameCard extends Component {
 
   componentDidMount() {
     this.handleStartGame();
+
+    this.props.requestHelloWorld();
   }
 
   getRandomInt = max => {
@@ -77,6 +83,8 @@ class GameCard extends Component {
               <h1 className="mb-5">
                 {digitOne} + {digitTwo}
               </h1>
+
+              <h1>{this.props.helloWorldMessage}</h1>
 
               <form onSubmit={this.checkAnswer}>
                 <div className="form-group row">
@@ -139,4 +147,11 @@ class GameCard extends Component {
   }
 }
 
-export default GameCard;
+const mapStateToProps = state => ({ helloWorldMessage: state.helloWorld });
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ requestHelloWorld }, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GameCard);
