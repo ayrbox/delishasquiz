@@ -1,7 +1,7 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import helloWorld from "./helloWorld";
+import helloWorld from './helloWorld';
 
 export default combineReducers({
-  helloWorld
+  helloWorld,
 });

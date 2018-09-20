@@ -1,6 +1,6 @@
-import { RECEIVE_HELLO_WORLD } from "../actions";
+import { RECEIVE_HELLO_WORLD } from '../actions';
 
-export default (state = "", { type, payload }) => {
+export default (state = '', { type, payload }) => {
   switch (type) {
     case RECEIVE_HELLO_WORLD:
       return payload.text;
