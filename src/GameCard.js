@@ -3,7 +3,7 @@ import classnames from "classnames";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { requestHelloWorld } from "./actions";
+import { generateQuestion } from "./actions";
 
 class GameCard extends Component {
   constructor(props) {
@@ -23,8 +23,6 @@ class GameCard extends Component {
 
   componentDidMount() {
     this.handleStartGame();
-
-    this.props.requestHelloWorld();
   }
 
   getRandomInt = max => {
@@ -84,7 +82,7 @@ class GameCard extends Component {
                 {digitOne} + {digitTwo}
               </h1>
 
-              <h1>{this.props.helloWorldMessage}</h1>
+              <pre>{JSON.stringify(this.props.question, {}, 4)}</pre>
 
               <form onSubmit={this.checkAnswer}>
                 <div className="form-group row">
@@ -104,6 +102,14 @@ class GameCard extends Component {
                   Check Answer
                 </button>
               </form>
+
+              <button
+                className="btn bnt-lg btn-danger"
+                type="submit"
+                onClick={this.props.generateQuestion}
+              >
+                Generate
+              </button>
             </div>
           </div>
           <div className="col-md-6 order-md-1">
@@ -147,9 +153,11 @@ class GameCard extends Component {
   }
 }
 
-const mapStateToProps = state => ({ helloWorldMessage: state.helloWorld });
+const mapStateToProps = state => ({
+  question: state.question
+});
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ requestHelloWorld }, dispatch);
+  bindActionCreators({ generateQuestion }, dispatch);
 
 export default connect(
   mapStateToProps,

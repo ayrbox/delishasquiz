@@ -1,9 +1,29 @@
-export const REQUEST_HELLO_WORLD = 'REQUEST_HELLO_WORLD';
-export const RECEIVE_HELLO_WORLD = 'RECEIVE_HELLO_WORLD';
+const GENERATE_QUESTION = "GENERATE_QUESTION";
+const RECEIVE_QUESTION = "RECEIVE_QUESTION";
 
-export const requestHelloWorld = () => ({ type: REQUEST_HELLO_WORLD });
+const CHECK_ANSWER = "CHECK_ANSWER";
+const RECEIVE_RESULT = "RECEIVE_RESULT";
 
-export const receiveHelloWorld = text => ({
-  type: RECEIVE_HELLO_WORLD,
-  payload: { text },
+export const ACTIONS = {
+  GENERATE_QUESTION,
+  RECEIVE_QUESTION,
+  CHECK_ANSWER,
+  RECEIVE_RESULT
+};
+
+export const generateQuestion = () => ({ type: GENERATE_QUESTION });
+
+export const receiveQuestion = payload => ({
+  type: RECEIVE_QUESTION,
+  payload
+});
+
+export const checkAnswer = payload => ({
+  type: CHECK_ANSWER,
+  payload
+});
+
+export const receiveResult = payload => ({
+  type: RECEIVE_RESULT,
+  payload
 });
