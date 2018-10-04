@@ -17,4 +17,11 @@ describe('core question', () => {
 
   })
 
+  describe('#get Randrom Operator', () => {
+    it('returns one of operator', () => {
+      console.log('TEST', questions.OPERATORS)
+        // questions.OPERATORS
+    })
+  })
+
 })
