@@ -100,7 +100,7 @@ class GameCard extends Component {
                       <input
                         className="form-control"
                         type="number"
-                        value={answer.toString()}
+                        value={(answer || '').toString()}
                         onChange={this.handleChange}
                         ref={(node) => {
                           this.answerInput = node;
