@@ -1,20 +1,19 @@
-import { takeLatest, put } from "redux-saga/effects";
-import { createQuestion } from "../core/questions";
+import { takeLatest, put, all } from 'redux-saga/effects';
+import { createQuestion } from '../core/questions';
 
 import {
   ACTIONS,
-  receiveQuestion,
-  checkAnswer,
-  receiveResult
-} from "../actions";
-import { all } from "redux-saga/effects";
+  // receiveQuestion,
+  // checkAnswer,
+  // receiveResult
+} from '../actions';
 
 function* generateNewQuestion() {
   const { RECEIVE_QUESTION } = ACTIONS;
   const q = createQuestion();
   yield put({
     type: RECEIVE_QUESTION,
-    payload: q
+    payload: q,
   });
 }
 

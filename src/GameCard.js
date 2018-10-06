@@ -1,9 +1,12 @@
-import React, { Component } from "react";
-import classnames from "classnames";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { generateQuestion } from "./actions";
+import { generateQuestion } from './actions';
+
+import { getRandomInt } from './core/questions';
 
 class GameCard extends Component {
   constructor(props) {
@@ -12,8 +15,8 @@ class GameCard extends Component {
     this.state = {
       digitOne: 0,
       digitTwo: 0,
-      answer: "",
-      answerLog: []
+      answer: '',
+      answerLog: [],
     };
 
     this.handleStartGame = this.handleStartGame.bind(this);
@@ -25,19 +28,15 @@ class GameCard extends Component {
     this.handleStartGame();
   }
 
-  getRandomInt = max => {
-    return Math.floor(Math.random() * Math.floor(max));
-  };
-
   handleStartGame() {
     const maxQuestionInt = 20;
-    const digitOne = this.getRandomInt(maxQuestionInt);
-    const digitTwo = this.getRandomInt(maxQuestionInt);
+    const digitOne = getRandomInt(maxQuestionInt);
+    const digitTwo = getRandomInt(maxQuestionInt);
 
     this.setState({
-      digitOne: digitOne,
-      digitTwo: digitTwo,
-      answer: ""
+      digitOne,
+      digitTwo,
+      answer: '',
     });
   }
 
@@ -45,13 +44,18 @@ class GameCard extends Component {
     e.preventDefault();
 
     this.setState({
-      answer: e.target.value
+      answer: e.target.value,
     });
   }
 
   checkAnswer(e) {
     e.preventDefault();
-    const { digitOne, digitTwo, answer, answerLog } = this.state;
+    const {
+      digitOne,
+      digitTwo,
+      answer,
+      answerLog,
+    } = this.state;
     const correctAnswer = digitOne + digitTwo;
     const yourAnswer = parseInt(answer, 0);
 
@@ -59,12 +63,12 @@ class GameCard extends Component {
       answerLog: [
         {
           question: `${digitOne} + ${digitTwo}`,
-          correctAnswer: correctAnswer,
-          yourAnswer: yourAnswer,
-          correct: correctAnswer === yourAnswer
+          correctAnswer,
+          yourAnswer,
+          correct: correctAnswer === yourAnswer,
         },
-        ...answerLog
-      ]
+        ...answerLog,
+      ],
     });
 
     this.handleStartGame();
@@ -72,6 +76,7 @@ class GameCard extends Component {
 
   render() {
     const { digitOne, digitTwo, answerLog } = this.state;
+    const { answer, generateQuestionFunc } = this.props;
     return (
       <div className="container mt-5">
         <div className="row">
@@ -79,23 +84,30 @@ class GameCard extends Component {
             <div className="p-5 border">
               <h3 className="mb-5">What is the answer?</h3>
               <h1 className="mb-5">
-                {digitOne} + {digitTwo}
+                {digitOne}
+                +
+                {digitTwo}
               </h1>
-
-              <pre>{JSON.stringify(this.props.question, {}, 4)}</pre>
 
               <form onSubmit={this.checkAnswer}>
                 <div className="form-group row">
-                  <label className="col-sm-4">Enter Your Answer</label>
-                  <div className="col-sm-8">
-                    <input
-                      className="form-control"
-                      type="number"
-                      value={this.state.answer.toString()}
-                      onChange={this.handleChange}
-                      autoFocus
-                    />
-                  </div>
+                  <label
+                    className="col-sm-4"
+                    htmlFor={this.answerInput}
+                  >
+                  Enter Your Answer
+                    <div className="col-sm-8">
+                      <input
+                        className="form-control"
+                        type="number"
+                        value={answer.toString()}
+                        onChange={this.handleChange}
+                        ref={(node) => {
+                          this.answerInput = node;
+                        }}
+                      />
+                    </div>
+                  </label>
                 </div>
 
                 <button className="btn btn-primary" type="submit">
@@ -106,7 +118,7 @@ class GameCard extends Component {
               <button
                 className="btn bnt-lg btn-danger"
                 type="submit"
-                onClick={this.props.generateQuestion}
+                onClick={generateQuestionFunc}
               >
                 Generate
               </button>
@@ -115,11 +127,10 @@ class GameCard extends Component {
           <div className="col-md-6 order-md-1">
             <div className="p-5 border">
               <h3 className="m-3">
-                Total Correct Answer :{" "}
-                {answerLog.reduce((t, l) => {
-                  return t + (l.correct ? 1 : 0);
-                }, 0)}{" "}
-                of {answerLog.length}
+                Total Correct Answer :
+                {answerLog.reduce((t, l) => t + (l.correct ? 1 : 0), 0)}
+                of
+                {answerLog.length}
               </h3>
               <ul className="list-group">
                 <li className="list-group-item d-flex justify-content-between align-items-center">
@@ -129,15 +140,15 @@ class GameCard extends Component {
                 </li>
                 {answerLog.map((l, i) => (
                   <li
-                    key={i}
+                    key={i.question}
                     className="list-group-item d-flex justify-content-between align-items-center"
                   >
                     <span>{l.question}</span>
                     <span>{l.correctAnswer}</span>
                     <span
                       className={classnames({
-                        "text-success": l.correct,
-                        "text-danger": !l.correct
+                        'text-success': l.correct,
+                        'text-danger': !l.correct,
                       })}
                     >
                       {l.yourAnswer}
@@ -153,13 +164,22 @@ class GameCard extends Component {
   }
 }
 
+GameCard.defaultProp = {
+  answer: '',
+};
+
+GameCard.propTypes = {
+  answer: PropTypes.func.isRequired,
+  generateQuestionFunc: PropTypes.func.isRequired,
+};
+
+
 const mapStateToProps = state => ({
-  question: state.question
+  question: state.question,
 });
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ generateQuestion }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ generateQuestion }, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(GameCard);
