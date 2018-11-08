@@ -24,24 +24,24 @@ describe('add/set key-value item', () => {
       const boolKey = 'isValid';
       const boolValue = true;
       set(boolKey, boolValue);
-      expect(localStorage.setItem).toHaveBeenLastCalledWith(boolKey, boolValue);
+      expect(localStorage.setItem).toHaveBeenLastCalledWith(boolKey, JSON.stringify(boolValue));
     });
 
     it('add string values', () => {
       const testKey = 'strKey';
       const testValue = 'string-value';
       set(testKey, testValue);
-      expect(localStorage.setItem).toHaveBeenLastCalledWith(testKey, testValue);
+      expect(localStorage.setItem).toHaveBeenLastCalledWith(testKey, JSON.stringify(testValue));
     });
 
     it('add object', () => {
       const objKey = 'objKey';
       const objValue = {
-        test: 'Hello',
-        address: 'address of object',
+        name: 'Object Name',
+        address: 'Address of Object',
       };
       set(objKey, objValue);
-      expect(localStorage.setItem).toHaveBeenLastCalledWith(objKey, objValue);
+      expect(localStorage.setItem).toHaveBeenLastCalledWith(objKey, JSON.stringify(objValue));
     });
   });
 });
@@ -56,12 +56,29 @@ describe('del item', () => {
 
 describe('read', () => {
   beforeEach(() => {
-    set('test', 'hello');
+    set('strKey', 'strValue');
+    set('boolKey', true);
+    set('objKey', {
+      name: 'User Test',
+      address: 'First Address Line',
+    });
   });
 
   it('get string', () => {
-    const v = get('test');
-    expect(localStorage.getItem).toHaveBeenLastCalledWith('test');
-    expect(v).toEqual('hello');
+    const v = get('strKey');
+    expect(localStorage.getItem).toHaveBeenLastCalledWith('strKey');
+    expect(v).toEqual(expect.any(String));
+  });
+
+  it('get bool', () => {
+    const b = get('boolKey');
+    expect(localStorage.getItem).toHaveBeenLastCalledWith('boolKey');
+    expect(b).toEqual(expect.any(Boolean));
+  });
+
+  it('get object', () => {
+    const o = get('objKey');
+    expect(localStorage.getItem).toHaveBeenLastCalledWith('objKey');
+    expect(o).toEqual(expect.any(Object));
   });
 });
