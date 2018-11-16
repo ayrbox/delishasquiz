@@ -27,4 +27,13 @@ describe('core question', () => {
       expect(newQuestion).toBeInstanceOf(Object);
     });
   });
+
+
+  describe('#get questions', () => {
+    it('returns array of questions', () => {
+      const q = questions.getQuestions(100);
+      expect(Array.isArray(q)).toBe(true);
+      expect(q.length).toEqual(100);
+    });
+  });
 });

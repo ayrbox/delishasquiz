@@ -1,5 +1,5 @@
 import { takeLatest, put, all } from 'redux-saga/effects';
-import { createQuestion } from '../core/questions';
+import { getQuestion } from '../core/questions';
 
 import {
   ACTIONS,
@@ -10,7 +10,7 @@ import {
 
 function* generateNewQuestion() {
   const { RECEIVE_QUESTION } = ACTIONS;
-  const q = createQuestion();
+  const q = getQuestion();
   yield put({
     type: RECEIVE_QUESTION,
     payload: q,

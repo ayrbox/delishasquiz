@@ -20,3 +20,5 @@ export const getQuestion = () => ({
   digitTwo: getRandomInt(20),
   operator: getRandomOperator(),
 });
+
+export const getQuestions = numberOfQuestions => [...Array(numberOfQuestions)].map(getQuestion);
