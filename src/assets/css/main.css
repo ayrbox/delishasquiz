@@ -1,0 +1,37 @@
+.landing-background {
+  min-height: 100vh;
+  min-width: 100vw;
+  height:100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.landing-background h1 {
+  font-family: 'Coda', cursive;
+  font-size: 4rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 5px 5px 10px rgba(0,0,0,.8)
+}
+
+
+.app-header {
+  background-size: cover;
+  background-position: center center;
+  min-height: 400px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.app-title {
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
+}
