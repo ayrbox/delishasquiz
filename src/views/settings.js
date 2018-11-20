@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 
 class Settings extends Component {
   componentDidMount() {
-    console.log('');
+    console.log('Should call get settings'); // eslint-disable-line
   }
 
   render() {
