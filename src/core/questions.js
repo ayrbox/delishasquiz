@@ -1,8 +1,8 @@
 export const OPERATORS = {
-  ADDITION: 'ADDITION',
-  SUBSTRACTION: 'SUBSTRACTION',
-  DIVISION: 'DIVISION',
-  MULTIPLICATION: 'MULTIPLICATION',
+  ADDITION: '+',
+  SUBSTRACTION: '-',
+  DIVISION: '/',
+  MULTIPLICATION: 'x',
 };
 
 export const getRandomInt = max => Math.floor(Math.random() * Math.floor(max));
@@ -16,8 +16,8 @@ export const getRandomOperator = () => {
 };
 
 export const getQuestion = () => ({
-  digitOne: getRandomInt(20),
-  digitTwo: getRandomInt(20),
+  digit1: getRandomInt(20),
+  digit2: getRandomInt(20),
   operator: getRandomOperator(),
 });
 

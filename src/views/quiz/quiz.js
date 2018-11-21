@@ -9,6 +9,9 @@ import Question from '../../components/Question';
 class Quiz extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      questionIdx: 0,
+    };
     this.handleSubmitAnswer = this.handleSubmitAnswer.bind(this);
   }
 
@@ -20,10 +23,18 @@ class Quiz extends Component {
   /* eslint-disable class-methods-use-this */
   handleSubmitAnswer(e) {
     e.preventDefault();
+    this.setState(prev => ({
+      questionIdx: prev.questionIdx + 1,
+    }));
   }
 
   render() {
     const answer = 0;
+    const { questions } = this.props;
+    const { questionIdx } = this.state;
+
+    if (questions.length === 0) return null;
+
     return (
       <Layout>
         <div className="container">
@@ -31,7 +42,7 @@ class Quiz extends Component {
             <div className="col-6">
               <div className="paper-card">
                 <QuestionCount counter={1} total={10} />
-                <Question question={{ digit1: 100, digit2: 200, operator: 'x' }} />
+                <Question question={questions[questionIdx]} />
                 <form onSubmit={this.handleSubmitAnswer}>
                   <div className="form-group row justify-content-start">
                     <label
@@ -66,6 +77,13 @@ class Quiz extends Component {
 
 Quiz.propTypes = {
   generateQuestion: PropTypes.func.isRequired,
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      digit1: PropTypes.number.isRequired,
+      digit2: PropTypes.number.isRequired,
+      operator: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default Quiz;
