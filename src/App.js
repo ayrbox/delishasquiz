@@ -2,7 +2,6 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './assets/css/main.css';
-// import './App.css';
 
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';

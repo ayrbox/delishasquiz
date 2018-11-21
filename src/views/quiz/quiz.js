@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-import Layout from '../components/Layout';
-import QuestionCount from '../components/QuestionCount';
-import Question from '../components/Question';
+import Layout from '../../components/Layout';
+import QuestionCount from '../../components/QuestionCount';
+import Question from '../../components/Question';
+
 
 class Quiz extends Component {
   constructor(props) {
@@ -12,14 +13,14 @@ class Quiz extends Component {
   }
 
   componentDidMount() {
-    console.log('To call generate questions and start quizj'); // eslint-disable-line
+    const { generateQuestion } = this.props;
+    generateQuestion();
   }
 
   /* eslint-disable class-methods-use-this */
   handleSubmitAnswer(e) {
     e.preventDefault();
   }
-
 
   render() {
     const answer = 0;
@@ -31,8 +32,6 @@ class Quiz extends Component {
               <div className="paper-card">
                 <QuestionCount counter={1} total={10} />
                 <Question question={{ digit1: 100, digit2: 200, operator: 'x' }} />
-
-
                 <form onSubmit={this.handleSubmitAnswer}>
                   <div className="form-group row justify-content-start">
                     <label
@@ -50,15 +49,11 @@ class Quiz extends Component {
                         }}
                       />
                     </label>
-
                   </div>
-
                   <button className="btn btn-outline-primary" type="submit">
                     Check Answer
                   </button>
                 </form>
-
-
               </div>
             </div>
           </div>
@@ -67,5 +62,10 @@ class Quiz extends Component {
     );
   }
 }
+
+
+Quiz.propTypes = {
+  generateQuestion: PropTypes.func.isRequired,
+};
 
 export default Quiz;
