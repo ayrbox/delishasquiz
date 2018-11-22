@@ -20,6 +20,10 @@ class Quiz extends Component {
     generateQuestion();
   }
 
+  componentDidUpdate() {
+    this.answerInput.focus();
+  }
+
   /* eslint-disable class-methods-use-this */
   handleSubmitAnswer(e) {
     e.preventDefault();
@@ -41,7 +45,7 @@ class Quiz extends Component {
           <div className="row justify-content-center">
             <div className="col-6">
               <div className="paper-card">
-                <QuestionCount counter={1} total={10} />
+                <QuestionCount counter={(questionIdx + 1)} total={questions.length} />
                 <Question question={questions[questionIdx]} />
                 <form onSubmit={this.handleSubmitAnswer}>
                   <div className="form-group row justify-content-start">
