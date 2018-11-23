@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { generateQuestion } from '../../actions';
+import { generateQuestion, submitAnswer } from '../../actions';
 import Quiz from './quiz';
 
 const mapState = state => ({
@@ -8,4 +8,5 @@ const mapState = state => ({
 
 export default connect(mapState, {
   generateQuestion,
+  submitAnswer,
 })(Quiz);

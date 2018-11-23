@@ -1,5 +1,5 @@
 import { takeLatest, put, all } from 'redux-saga/effects';
-import { getQuestions } from '../core/questions';
+import { getQuestions, getAnswer } from '../core/questions';
 
 import {
   ACTIONS,
@@ -17,9 +17,31 @@ function* generateQuestions() {
   });
 }
 
+function* submitAnswer(action) {
+  const { SUBMIT_ANSWER_SUCCESS, SUBMIT_ANSWER_FAIL } = ACTIONS;
+  try {
+    const { question, answer } = action.payload;
+    const correctAnswer = getAnswer(question);
+    yield put({
+      type: SUBMIT_ANSWER_SUCCESS,
+      payload: {
+        ...question,
+        correctAnswer,
+        answer,
+        correct: correctAnswer === answer,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: SUBMIT_ANSWER_FAIL,
+    });
+  }
+}
+
 function* watchGenerateQuestion() {
-  const { GENERATE_QUESTION } = ACTIONS;
+  const { GENERATE_QUESTION, SUBMIT_ANSWER } = ACTIONS;
   yield takeLatest(GENERATE_QUESTION, generateQuestions);
+  yield takeLatest(SUBMIT_ANSWER, submitAnswer);
 }
 
 export default function* questionSagas() {

@@ -1,14 +1,18 @@
 const GENERATE_QUESTION = 'GENERATE_QUESTION';
 const RECEIVE_QUESTION = 'RECEIVE_QUESTION';
 
-const CHECK_ANSWER = 'CHECK_ANSWER';
+const SUBMIT_ANSWER = 'CHECK_ANSWER';
+const SUBMIT_ANSWER_SUCCESS = 'SUBMIT_ANSWER_SUCCESS';
+const SUBMIT_ANSWER_FAIL = 'SUBMIT_ANSWER_FAIL';
 const RECEIVE_RESULT = 'RECEIVE_RESULT';
 
 export const ACTIONS = {
   GENERATE_QUESTION,
   RECEIVE_QUESTION,
-  CHECK_ANSWER,
+  SUBMIT_ANSWER,
   RECEIVE_RESULT,
+  SUBMIT_ANSWER_SUCCESS,
+  SUBMIT_ANSWER_FAIL,
 };
 
 export const generateQuestion = () => ({ type: GENERATE_QUESTION });
@@ -18,8 +22,8 @@ export const receiveQuestion = payload => ({
   payload,
 });
 
-export const checkAnswer = payload => ({
-  type: CHECK_ANSWER,
+export const submitAnswer = payload => ({
+  type: SUBMIT_ANSWER,
   payload,
 });
 

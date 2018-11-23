@@ -11,8 +11,10 @@ class Quiz extends Component {
     super(props);
     this.state = {
       questionIdx: 0,
+      answer: '',
     };
     this.handleSubmitAnswer = this.handleSubmitAnswer.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -27,15 +29,30 @@ class Quiz extends Component {
   /* eslint-disable class-methods-use-this */
   handleSubmitAnswer(e) {
     e.preventDefault();
+
+    const { questions, submitAnswer } = this.props;
+    const { questionIdx, answer } = this.state;
+    submitAnswer({
+      question: questions[questionIdx],
+      answer: parseFloat(answer),
+    });
+
     this.setState(prev => ({
       questionIdx: prev.questionIdx + 1,
+      answer: '',
     }));
   }
 
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      answer: e.target.value,
+    });
+  }
+
   render() {
-    const answer = 0;
     const { questions } = this.props;
-    const { questionIdx } = this.state;
+    const { questionIdx, answer } = this.state;
 
     if (questions.length === 0) return null;
 
@@ -43,7 +60,7 @@ class Quiz extends Component {
       <Layout>
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-6">
+            <div className="col-12 col-sm-10 col-md-8">
               <div className="paper-card">
                 <QuestionCount counter={(questionIdx + 1)} total={questions.length} />
                 <Question question={questions[questionIdx]} />
@@ -81,6 +98,7 @@ class Quiz extends Component {
 
 Quiz.propTypes = {
   generateQuestion: PropTypes.func.isRequired,
+  submitAnswer: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(
     PropTypes.shape({
       digit1: PropTypes.number.isRequired,
