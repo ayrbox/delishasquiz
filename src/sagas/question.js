@@ -21,7 +21,7 @@ function* submitAnswer(action) {
   const { SUBMIT_ANSWER_SUCCESS, SUBMIT_ANSWER_FAIL } = ACTIONS;
   try {
     const { question, answer } = action.payload;
-    const correctAnswer = getAnswer(question);
+    const correctAnswer = yield getAnswer(question);
     yield put({
       type: SUBMIT_ANSWER_SUCCESS,
       payload: {

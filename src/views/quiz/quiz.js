@@ -30,12 +30,16 @@ class Quiz extends Component {
   handleSubmitAnswer(e) {
     e.preventDefault();
 
-    const { questions, submitAnswer } = this.props;
+    const { questions, submitAnswer, history } = this.props;
     const { questionIdx, answer } = this.state;
     submitAnswer({
       question: questions[questionIdx],
       answer: parseFloat(answer),
     });
+
+    if ((questionIdx + 1) === questions.length) {
+      history.push('/result');
+    }
 
     this.setState(prev => ({
       questionIdx: prev.questionIdx + 1,
@@ -106,6 +110,7 @@ Quiz.propTypes = {
       operator: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  history: PropTypes.shape.isRequired,
 };
 
 export default Quiz;
