@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 import Layout from '../../components/Layout';
 
@@ -13,30 +14,37 @@ const Result = ({ result }) => (
           <div className="paper-card">
             <ul className="list-group">
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                <strong>Problem</strong>
-                <strong>Answer</strong>
-                <strong>Your Answer</strong>
+                <strong className="result-item-container">Problem</strong>
+                <strong className="result-item-container">Answer</strong>
+                <strong className="result-item-container">Your Answer</strong>
               </li>
               {result.map(answer => (
                 <li key={`${answer.digit1}${answer.operator}${answer.digit2}`} className="list-group-item d-flex justify-content-between align-items-center">
-                  <span>
+                  <span className="result-item-container">
                     {answer.digit1}
                     {` ${answer.operator} `}
                     {answer.digit2}
                   </span>
-                  <span>
+                  <span className="result-item-container">
                     {answer.correctAnswer}
                   </span>
                   <span className={classNames({
+                    'result-item-container': true,
                     'text-success': answer.correct,
                     'text-danger': !answer.correct,
                   })}
                   >
                     {answer.answer}
+                    {answer.correct ? <span> &#10003;</span> : <span> &times;</span> }
                   </span>
                 </li>
               ))}
             </ul>
+            <div className="d-flex justify-content-end pt-3">
+              <Link to="/game" className="btn btn-outline-primary">
+                Start again
+              </Link>
+            </div>
           </div>
         </div>
       </div>
