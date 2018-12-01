@@ -15,6 +15,7 @@ class Quiz extends Component {
     };
     this.handleSubmitAnswer = this.handleSubmitAnswer.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handlePass = this.handlePass.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +33,12 @@ class Quiz extends Component {
 
     const { questions, submitAnswer, history } = this.props;
     const { questionIdx, answer } = this.state;
+
+    if (!answer) {
+      this.setState({ message: 'Please enter answer or click pass' });
+      return;
+    }
+
     submitAnswer({
       question: questions[questionIdx],
       answer: parseFloat(answer),
@@ -44,6 +51,30 @@ class Quiz extends Component {
     this.setState(prev => ({
       questionIdx: prev.questionIdx + 1,
       answer: '',
+      message: '',
+    }));
+  }
+
+  handlePass(e) {
+    e.preventDefault();
+
+    const { questions, submitAnswer, history } = this.props;
+    const { questionIdx } = this.state;
+
+    submitAnswer({
+      question: questions[questionIdx],
+      answer: 'PASS',
+    });
+
+
+    if ((questionIdx + 1) === questions.length) {
+      history.push('/result');
+    }
+
+    this.setState(prev => ({
+      questionIdx: prev.questionIdx + 1,
+      answer: '',
+      message: '',
     }));
   }
 
@@ -56,7 +87,7 @@ class Quiz extends Component {
 
   render() {
     const { questions } = this.props;
-    const { questionIdx, answer } = this.state;
+    const { questionIdx, answer, message } = this.state;
 
     if (questions.length === 0) return null;
 
@@ -69,6 +100,11 @@ class Quiz extends Component {
                 <QuestionCount counter={(questionIdx + 1)} total={questions.length} />
                 <Question question={questions[questionIdx]} />
                 <form onSubmit={this.handleSubmitAnswer}>
+                  <div className="form-group row justify-content-start text-danger">
+                    <div className="col">
+                      { message }
+                    </div>
+                  </div>
                   <div className="form-group row justify-content-start">
                     <label
                       className="col-sm-6"
@@ -88,6 +124,13 @@ class Quiz extends Component {
                   </div>
                   <button className="btn btn-outline-primary" type="submit">
                     Check Answer
+                  </button>
+                  <button
+                    className="btn btn-outline-warning ml-3"
+                    type="button"
+                    onClick={this.handlePass}
+                  >
+                    Pass
                   </button>
                 </form>
               </div>
