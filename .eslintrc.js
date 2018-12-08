@@ -9,6 +9,11 @@ module.exports = {
           ".jsx"
         ]
       }
+    ],
+   "import/no-extraneous-dependencies": [
+     "error", {
+       "devDependencies": true, 
+     }
     ]
   },
   "env": {
