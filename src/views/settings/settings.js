@@ -16,17 +16,26 @@ class Settings extends Component {
       selected: operators.includes(operatorKey),
     }));
 
-    console.log('Operator Settings', operatorSettings);
-
     this.state = {
       level,
-      operators,
+      operatorSettings,
       questionsPerQuiz,
     };
+    this.handleCheckOperator = this.handleCheckOperator.bind(this);
+  }
+
+  handleCheckOperator(e) {
+    const { name: key, checked: selected } = e.target;
+    this.setState(prev => ({
+      operatorSettings: prev.operatorSettings.map(operator => ({
+        ...operator,
+        selected: ((operator.key === key) ? selected : operator.selected),
+      })),
+    }));
   }
 
   render() {
-    const { level, operators, questionsPerQuiz } = this.state;
+    const { level, operatorSettings, questionsPerQuiz } = this.state;
     return (
       <Layout title="Settings">
         <div className="container paper-card">
@@ -39,15 +48,22 @@ class Settings extends Component {
             </label>
           </div>
           <h1>Operators</h1>
-          {Object.keys(OPERATORS).map(key => (
-            <div className="form-check">
-              <label className="form-check-label" htmlFor={`operator_${key}`}>
-                <input className="form-check-input" type="checkbox" value="" id={`operator_${key}`} />
-                {`${key}(${OPERATORS[key]})`}
+          {operatorSettings.map(o => (
+            <div className="form-check" key={o.key}>
+              <label className="form-check-label" htmlFor={`operator_${o.key}`}>
+                <input
+                  name={o.key}
+                  className="form-check-input"
+                  type="checkbox"
+                  checked={o.selected}
+                  id={`operator_${o.key}`}
+                  onChange={this.handleCheckOperator}
+                />
+                {`${o.key}(${o.description})`}
               </label>
             </div>
+
           ))}
-          {JSON.stringify(operators, null, 2)}
           <h1>Questions per quiz</h1>
           <select className="form-control" defaultValue={questionsPerQuiz}>
             <option>10</option>
