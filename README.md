@@ -1,5 +1,7 @@
 # Maths Quiz
 
+[![CircleCI](https://circleci.com/gh/ayrbox/mathsquiz.svg?style=svg)](https://circleci.com/gh/ayrbox/mathsquiz)
+
 Simple Maths quiz for 6-10 years children.
 
 Currently there is not levels or any other arithematic operation expect addition. This was created which looking after 6 years old child with laptop on my hand.

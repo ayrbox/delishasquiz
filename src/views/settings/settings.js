@@ -22,6 +22,7 @@ class Settings extends Component {
       questionsPerQuiz,
     };
     this.handleCheckOperator = this.handleCheckOperator.bind(this);
+    this.handleLevelChange = this.handleLevelChange.bind(this);
   }
 
   handleCheckOperator(e) {
@@ -34,44 +35,77 @@ class Settings extends Component {
     }));
   }
 
+  handleLevelChange(e) {
+    const { value } = e.target;
+    this.setState({
+      level: value,
+    });
+  }
+
   render() {
     const { level, operatorSettings, questionsPerQuiz } = this.state;
     return (
       <Layout title="Settings">
         <div className="container paper-card">
-          <h1>Level</h1>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">
-              Level
-              <input type="number" className="form-control" id="levelSettings" aria-describedby="levelSettings" placeholder="Level" value={level} />
-              <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
+          <pre>
+            {JSON.stringify(this.state, null, 2)}
+          </pre>
+          <h4 className="mb-3">Difficulty</h4>
+          <div className="mb-3">
+            <label htmlFor="levelSettings">
+              Level:
+              <input
+                type="text"
+                className="form-control mt-3"
+                id="levelSettings"
+                placeholder="e.g. 1"
+                value={level}
+                onChange={this.handleLevelChange}
+              />
             </label>
+            <small id="levelHelp" className="form-text text-muted">Maxium number of answer you will provide will be level times 10 (i.e 4 x 10 will be max answer for level 4)</small>
           </div>
-          <h1>Operators</h1>
-          {operatorSettings.map(o => (
-            <div className="form-check" key={o.key}>
-              <label className="form-check-label" htmlFor={`operator_${o.key}`}>
-                <input
-                  name={o.key}
-                  className="form-check-input"
-                  type="checkbox"
-                  checked={o.selected}
-                  id={`operator_${o.key}`}
-                  onChange={this.handleCheckOperator}
-                />
-                {`${o.key}(${o.description})`}
-              </label>
-            </div>
-
-          ))}
-          <h1>Questions per quiz</h1>
-          <select className="form-control" defaultValue={questionsPerQuiz}>
-            <option>10</option>
-            <option>20</option>
-            <option>30</option>
-            <option>40</option>
-            <option>50</option>
-          </select>
+          <p>Operators: </p>
+          <div className="mb-3">
+            {operatorSettings.map(o => (
+              <div className="form-check" key={o.key}>
+                <label className="form-check-label" htmlFor={`operator_${o.key}`}>
+                  <input
+                    name={o.key}
+                    className="form-check-input"
+                    type="checkbox"
+                    checked={o.selected}
+                    id={`operator_${o.key}`}
+                    onChange={this.handleCheckOperator}
+                  />
+                  {`${o.key}(${o.description})`}
+                </label>
+              </div>
+            ))}
+          </div>
+          <hr className="mb-4" />
+          <h4 className="mb-3">Others</h4>
+          <div className="mb-3">
+            <label htmlFor="questionNumbers">
+              Questions per quiz:
+              <input hidden />
+            </label>
+            <select
+              id="questionNumbers"
+              className="form-control"
+              defaultValue={questionsPerQuiz}
+            >
+              <option>10</option>
+              <option>20</option>
+              <option>30</option>
+              <option>40</option>
+              <option>50</option>
+            </select>
+          </div>
+          <div className="">
+            <button type="submit" className="btn btn-outline-primary mr-1">Save</button>
+            <button type="button" className="btn btn-outline-secondary">Cancel</button>
+          </div>
         </div>
       </Layout>
     );
