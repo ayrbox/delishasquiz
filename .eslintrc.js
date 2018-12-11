@@ -22,5 +22,10 @@ module.exports = {
     "browser": true,
     "node": true,
     "jest": true
+  }, 
+  "settings": {
+    "import/resolver": {
+      "babel-plugin-root-import": {}
+    }  
   }
 };

@@ -37,11 +37,11 @@ describe('core question', () => {
 
   describe('#isValidQuestion', () => {
     it('returns false', () => {
-      console.log('TODO Valid question');
+      console.log('TODO Valid question'); // eslint-disable-line
     });
 
     it('returns true', () => {
-      console.log('TODO Valid quesitons');
+      console.log('TODO Valid quesitons'); // eslint-disable-line
     });
   });
 
