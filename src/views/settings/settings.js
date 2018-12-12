@@ -23,6 +23,8 @@ class Settings extends Component {
     };
     this.handleCheckOperator = this.handleCheckOperator.bind(this);
     this.handleLevelChange = this.handleLevelChange.bind(this);
+    this.handleQuestionsPerQuiz = this.handleQuestionsPerQuiz.bind(this);
+    this.handleSaveSettings = this.handleSaveSettings.bind(this);
   }
 
   handleCheckOperator(e) {
@@ -40,6 +42,18 @@ class Settings extends Component {
     this.setState({
       level: value,
     });
+  }
+
+  handleQuestionsPerQuiz(e) {
+    const { value } = e.target;
+    this.setState({ questionsPerQuiz: value });
+  }
+
+  handleSaveSettings(e) {
+    e.preventDefault();
+    // todo Validate settings
+    const { saveSettings } = this.props;
+    saveSettings(this.state);
   }
 
   render() {
@@ -93,7 +107,8 @@ class Settings extends Component {
             <select
               id="questionNumbers"
               className="form-control"
-              defaultValue={questionsPerQuiz}
+              value={questionsPerQuiz}
+              onChange={this.handleQuestionsPerQuiz}
             >
               <option>10</option>
               <option>20</option>
@@ -102,8 +117,8 @@ class Settings extends Component {
               <option>50</option>
             </select>
           </div>
-          <div className="">
-            <button type="submit" className="btn btn-outline-primary mr-1">Save</button>
+          <div className="row">
+            <button type="submit" className="btn btn-outline-primary mr-1" onClick={this.handleSaveSettings}>Save</button>
             <button type="button" className="btn btn-outline-secondary">Cancel</button>
           </div>
         </div>
@@ -126,6 +141,7 @@ Settings.propTypes = {
     operators: PropTypes.array,
     questionsPerQuiz: PropTypes.number,
   }),
+  saveSettings: PropTypes.func.isRequired,
 };
 
 export default Settings;
