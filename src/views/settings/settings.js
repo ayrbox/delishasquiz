@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Layout from '../../components/Layout';
-import { OPERATORS } from '../../core/questions';
 
 class Settings extends Component {
   constructor(props) {
     super(props);
     const { settings } = props;
-    const { level, operators, questionsPerQuiz } = settings;
-
-    const operatorSettings = Object.keys(OPERATORS).map(operatorKey => ({
-      key: operatorKey,
-      description: OPERATORS[operatorKey],
-      selected: operators.includes(operatorKey),
-    }));
+    const { level, operatorSettings, questionsPerQuiz } = settings;
 
     this.state = {
       level,

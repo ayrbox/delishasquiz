@@ -9,15 +9,21 @@ const SETTING_KEY = 'QZ_s3tt91ng';
 function* saveSettings(actions) {
   const { payload } = actions;
   yield set(SETTING_KEY, payload);
-  // todo redirect or display to show message
+
+  const { SAVE_SETTINGS_SUCCESS } = ACTIONS;
   yield put({
-    type: 'test',
+    type: SAVE_SETTINGS_SUCCESS,
   });
 }
 
-function* getSettings(actions) {
+function* getSettings() {
   const settings = yield get(SETTING_KEY);
-  yield console.log('terotauio action', actions, settings);
+
+  const { GET_SETTINGS_SUCCESS } = ACTIONS;
+  yield put({
+    type: GET_SETTINGS_SUCCESS,
+    payload: settings,
+  });
 }
 
 
