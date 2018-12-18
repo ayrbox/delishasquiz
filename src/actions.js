@@ -7,6 +7,8 @@ const SUBMIT_ANSWER_FAIL = 'SUBMIT_ANSWER_FAIL';
 const RECEIVE_RESULT = 'RECEIVE_RESULT';
 
 const SAVE_SETTINGS = 'SAVE_SETTINGS';
+const GET_SETTINGS = 'GET_SETTINGS';
+const GET_SETTINGS_SUCCESS = 'GET_SETTINGS_SUCCESS';
 
 export const ACTIONS = {
   GENERATE_QUESTION,
@@ -16,6 +18,8 @@ export const ACTIONS = {
   SUBMIT_ANSWER_SUCCESS,
   SUBMIT_ANSWER_FAIL,
   SAVE_SETTINGS,
+  GET_SETTINGS,
+  GET_SETTINGS_SUCCESS,
 };
 
 export const generateQuestion = () => ({ type: GENERATE_QUESTION });
@@ -38,5 +42,16 @@ export const receiveResult = payload => ({
 
 export const saveSettings = payload => ({
   type: SAVE_SETTINGS,
+  payload,
+});
+
+
+export const getSettings = () => ({
+  type: GET_SETTINGS,
+});
+
+
+export const getSettingSuccess = payload => ({
+  type: GET_SETTINGS_SUCCESS,
   payload,
 });

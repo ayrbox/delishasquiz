@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Settings from './settings';
-import { saveSettings } from '../../actions';
+import { saveSettings, getSettings } from '../../actions';
 
 const mapState = () => ({
   settings: {
@@ -12,4 +12,5 @@ const mapState = () => ({
 
 export default connect(mapState, {
   saveSettings,
+  getSettings,
 })(Settings);

@@ -27,6 +27,11 @@ class Settings extends Component {
     this.handleSaveSettings = this.handleSaveSettings.bind(this);
   }
 
+  componentDidMount() {
+    const { getSettings } = this.props;
+    getSettings();
+  }
+
   handleCheckOperator(e) {
     const { name: key, checked: selected } = e.target;
     this.setState(prev => ({
@@ -142,6 +147,7 @@ Settings.propTypes = {
     questionsPerQuiz: PropTypes.number,
   }),
   saveSettings: PropTypes.func.isRequired,
+  getSettings: PropTypes.func.isRequired,
 };
 
 export default Settings;
