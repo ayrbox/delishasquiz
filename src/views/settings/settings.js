@@ -66,9 +66,12 @@ class Settings extends Component {
 
   render() {
     const { level, operatorSettings, questionsPerQuiz } = this.state;
+    const { settings, history } = this.props;
+    const { message } = settings;
     return (
       <Layout title="Settings">
         <div className="container paper-card">
+          {message && <div className="alert alert-success">{message}</div>}
           <h4 className="mb-3">Difficulty</h4>
           <div className="mb-3">
             <label htmlFor="levelSettings">
@@ -124,7 +127,15 @@ class Settings extends Component {
           </div>
           <div className="row">
             <button type="submit" className="btn btn-outline-primary mr-1" onClick={this.handleSaveSettings}>Save</button>
-            <button type="button" className="btn btn-outline-secondary">Cancel</button>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </Layout>
@@ -148,6 +159,7 @@ Settings.propTypes = {
   }),
   saveSettings: PropTypes.func.isRequired,
   getSettings: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default Settings;
