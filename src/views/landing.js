@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // ImageSource: https://unsplash.com/photos/jvBXiynINGE
 import bg from '../assets/images/bg.jpg';
+import Footer from '../components/Footer';
 
 const Landing = () => (
   <main className="landing-background" style={{ backgroundImage: `url(${bg})` }}>
@@ -27,6 +28,7 @@ const Landing = () => (
         </div>
       </div>
     </div>
+    <Footer />
   </main>
 );
 

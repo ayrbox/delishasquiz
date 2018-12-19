@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import bg from '../assets/images/bg.jpg';
+import Footer from './Footer';
 
 const Layout = ({ title, children }) => (
   <main className="app-layout">
@@ -11,6 +12,7 @@ const Layout = ({ title, children }) => (
       <h1 className="app-title">{title}</h1>
     </header>
     {children}
+    <Footer />
   </main>
 );
 
