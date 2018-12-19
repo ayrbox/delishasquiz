@@ -1,21 +1,14 @@
 import { ACTIONS } from '../actions';
-import { OPERATORS } from '../../core/questions';
-
-    // const operatorSettings = Object.keys(OPERATORS).map(operatorKey => ({
-    //   key: operatorKey,
-    //   description: OPERATORS[operatorKey],
-    //   selected: operators.includes(operatorKey),
-    // }));
-
+import { OPERATORS } from '../core/questions';
 
 const initialState = {
-  level: '300',
+  level: 1,
   operatorSettings: Object.keys(OPERATORS).map(key => ({
     key,
-    description: OPERATORS[operatorKey],
+    description: OPERATORS[key],
     selected: true,
-  }),
-  questionsPerQuiz: 50,
+  })),
+  questionsPerQuiz: 10,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -24,7 +17,7 @@ export default (state = initialState, { type, payload }) => {
     case GET_SETTINGS_SUCCESS:
       return {
         ...state,
-        payload,
+        ...payload,
       };
     default:
       return state;

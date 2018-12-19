@@ -25,6 +25,16 @@ class Settings extends Component {
     getSettings();
   }
 
+  componentWillReceiveProps(props) {
+    const { settings } = props;
+    const { level, operatorSettings, questionsPerQuiz } = settings;
+    this.setState({
+      level,
+      operatorSettings,
+      questionsPerQuiz,
+    });
+  }
+
   handleCheckOperator(e) {
     const { name: key, checked: selected } = e.target;
     this.setState(prev => ({
@@ -59,9 +69,6 @@ class Settings extends Component {
     return (
       <Layout title="Settings">
         <div className="container paper-card">
-          <pre>
-            {JSON.stringify(this.state, null, 2)}
-          </pre>
           <h4 className="mb-3">Difficulty</h4>
           <div className="mb-3">
             <label htmlFor="levelSettings">
