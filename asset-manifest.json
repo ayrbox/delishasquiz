@@ -1,7 +1,7 @@
 {
   "main.css": "/mathsquiz/static/css/main.f5df03d1.chunk.css",
-  "main.js": "/mathsquiz/static/js/main.bac61112.chunk.js",
-  "main.js.map": "/mathsquiz/static/js/main.bac61112.chunk.js.map",
+  "main.js": "/mathsquiz/static/js/main.a3505872.chunk.js",
+  "main.js.map": "/mathsquiz/static/js/main.a3505872.chunk.js.map",
   "static/css/1.35279cec.chunk.css": "/mathsquiz/static/css/1.35279cec.chunk.css",
   "static/js/1.2f0cc866.chunk.js": "/mathsquiz/static/js/1.2f0cc866.chunk.js",
   "static/js/1.2f0cc866.chunk.js.map": "/mathsquiz/static/js/1.2f0cc866.chunk.js.map",
@@ -11,6 +11,6 @@
   "static/media/bg.jpg": "/mathsquiz/static/media/bg.910b20e5.jpg",
   "static/css/main.f5df03d1.chunk.css.map": "/mathsquiz/static/css/main.f5df03d1.chunk.css.map",
   "index.html": "/mathsquiz/index.html",
-  "precache-manifest.912d25f249c05a12ed26d5912b9f42d0.js": "/mathsquiz/precache-manifest.912d25f249c05a12ed26d5912b9f42d0.js",
+  "precache-manifest.59d226837ecbb8f96a83aaf1a8c7ed57.js": "/mathsquiz/precache-manifest.59d226837ecbb8f96a83aaf1a8c7ed57.js",
   "service-worker.js": "/mathsquiz/service-worker.js"
 }
