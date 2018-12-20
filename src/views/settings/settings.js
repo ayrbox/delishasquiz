@@ -61,7 +61,14 @@ class Settings extends Component {
     e.preventDefault();
     // todo Validate settings
     const { saveSettings } = this.props;
-    saveSettings(this.state);
+    const { level, operatorSettings, questionsPerQuiz } = this.state;
+
+    const settings = {
+      level: parseInt(level, 10),
+      operatorSettings,
+      questionsPerQuiz: parseInt(questionsPerQuiz, 10),
+    };
+    saveSettings(settings);
   }
 
   render() {

@@ -154,8 +154,12 @@ Quiz.propTypes = {
       operator: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  history: PropTypes.shape.isRequired,
-  settings: PropTypes.object.isRequired, // eslint-disable-line
+  history: PropTypes.object.isRequired, // eslint-disable-line
+  settings: PropTypes.shape({
+    level: PropTypes.number,
+    operators: PropTypes.array,
+    questionsPerQuiz: PropTypes.number,
+  }).isRequired,
 };
 
 export default Quiz;

@@ -1,5 +1,5 @@
 import { takeLatest, put, all } from 'redux-saga/effects';
-import { getQuestions, getAnswer } from '../core/questions';
+import { OPERATORS, getQuestions, getAnswer } from '../core/questions';
 
 import {
   ACTIONS,
@@ -9,9 +9,7 @@ function* generateQuestions(action) {
   const { RECEIVE_QUESTION } = ACTIONS;
   const { level, operatorSettings, questionsPerQuiz } = action.payload;
 
-  const operators = operatorSettings.filter(o => o.selected).map(o => o.key);
-  // yield console.log(level, operators, questionsPerQuiz);
-
+  const operators = operatorSettings.filter(o => o.selected).map(o => OPERATORS[o.key]);
   const q = yield getQuestions(level, operators, questionsPerQuiz);
   yield put({
     type: RECEIVE_QUESTION,
