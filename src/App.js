@@ -11,6 +11,7 @@ import GameCard from './GameCard';
 import Quiz from './views/quiz';
 import Result from './views/result';
 import Settings from './views/settings';
+import About from './views/about';
 import store from './store';
 
 
@@ -22,6 +23,7 @@ const App = () => (
         <Route exact path="/game" component={Quiz} />
         <Route exact path="/result" component={Result} />
         <Route exact path="/settings" component={Settings} />
+        <Route exact path="/about" component={About} />
         <Route exact path="/test" component={GameCard} />
       </Switch>
     </Router>
