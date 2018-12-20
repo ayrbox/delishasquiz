@@ -1,9 +1,7 @@
 import { takeLatest, put, all } from 'redux-saga/effects';
 import { get, set } from '../utils/localStorage';
-
 import { ACTIONS } from '../actions';
-
-export const SETTING_KEY = 'QZ_s3tt91ng';
+import { SETTING_KEY } from '../constants';
 
 
 function* saveSettings(actions) {

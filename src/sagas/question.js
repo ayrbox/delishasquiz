@@ -1,10 +1,8 @@
 import { takeLatest, put, all } from 'redux-saga/effects';
 import { OPERATORS, getQuestions, getAnswer } from '../core/questions';
-import { SETTING_KEY } from './settingsSaga';
+import { SETTING_KEY } from '../constants';
 import { get } from '../utils/localStorage';
-import {
-  ACTIONS,
-} from '../actions';
+import { ACTIONS } from '../actions';
 
 function* generateQuestions() {
   const { RECEIVE_QUESTION } = ACTIONS;
