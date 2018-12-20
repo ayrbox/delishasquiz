@@ -1,16 +1,16 @@
 {
   "main.css": "/mathsquiz/static/css/main.f5df03d1.chunk.css",
-  "main.js": "/mathsquiz/static/js/main.69996ed3.chunk.js",
-  "main.js.map": "/mathsquiz/static/js/main.69996ed3.chunk.js.map",
+  "main.js": "/mathsquiz/static/js/main.ebf1663f.chunk.js",
+  "main.js.map": "/mathsquiz/static/js/main.ebf1663f.chunk.js.map",
   "static/css/1.35279cec.chunk.css": "/mathsquiz/static/css/1.35279cec.chunk.css",
-  "static/js/1.2f0cc866.chunk.js": "/mathsquiz/static/js/1.2f0cc866.chunk.js",
-  "static/js/1.2f0cc866.chunk.js.map": "/mathsquiz/static/js/1.2f0cc866.chunk.js.map",
+  "static/js/1.ab169aef.chunk.js": "/mathsquiz/static/js/1.ab169aef.chunk.js",
+  "static/js/1.ab169aef.chunk.js.map": "/mathsquiz/static/js/1.ab169aef.chunk.js.map",
   "runtime~main.js": "/mathsquiz/static/js/runtime~main.7f5728cd.js",
   "runtime~main.js.map": "/mathsquiz/static/js/runtime~main.7f5728cd.js.map",
   "static/css/main.f5df03d1.chunk.css.map": "/mathsquiz/static/css/main.f5df03d1.chunk.css.map",
   "static/media/bg.jpg": "/mathsquiz/static/media/bg.910b20e5.jpg",
   "static/css/1.35279cec.chunk.css.map": "/mathsquiz/static/css/1.35279cec.chunk.css.map",
   "index.html": "/mathsquiz/index.html",
-  "precache-manifest.5c04d921b763f8c28b46f59e1b87bb47.js": "/mathsquiz/precache-manifest.5c04d921b763f8c28b46f59e1b87bb47.js",
+  "precache-manifest.a4f139da10e000253bfb05c03297b8db.js": "/mathsquiz/precache-manifest.a4f139da10e000253bfb05c03297b8db.js",
   "service-worker.js": "/mathsquiz/service-worker.js"
 }
