@@ -3,7 +3,7 @@ import { get, set } from '../utils/localStorage';
 
 import { ACTIONS } from '../actions';
 
-const SETTING_KEY = 'QZ_s3tt91ng';
+export const SETTING_KEY = 'QZ_s3tt91ng';
 
 
 function* saveSettings(actions) {
