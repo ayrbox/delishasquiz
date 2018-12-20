@@ -1,16 +1,7 @@
 import { ACTIONS } from '../actions';
-import { OPERATORS } from '../core/questions';
+import { DEFAULT_SETTINGS } from '../constants';
 
-const initialState = {
-  level: 1,
-  operatorSettings: Object.keys(OPERATORS).map(key => ({
-    key,
-    description: OPERATORS[key],
-    selected: true,
-  })),
-  questionsPerQuiz: 10,
-  message: undefined,
-};
+const initialState = DEFAULT_SETTINGS;
 
 export default (state = initialState, { type, payload }) => {
   const { GET_SETTINGS_SUCCESS, SAVE_SETTINGS_SUCCESS } = ACTIONS;

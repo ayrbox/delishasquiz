@@ -1,6 +1,6 @@
 import { takeLatest, put, all } from 'redux-saga/effects';
 import { OPERATORS, getQuestions, getAnswer } from '../core/questions';
-import { SETTING_KEY } from '../constants';
+import { DEFAULT_SETTINGS, SETTING_KEY } from '../constants';
 import { get } from '../utils/localStorage';
 import { ACTIONS } from '../actions';
 
@@ -8,10 +8,10 @@ function* generateQuestions() {
   const { RECEIVE_QUESTION } = ACTIONS;
 
   const settings = yield get(SETTING_KEY);
-  const { level, operatorSettings, questionsPerQuiz } = settings;
-
+  const { level, operatorSettings, questionsPerQuiz } = settings || DEFAULT_SETTINGS;
   const operators = operatorSettings.filter(o => o.selected).map(o => OPERATORS[o.key]);
   const q = yield getQuestions(level, operators, questionsPerQuiz);
+
   yield put({
     type: RECEIVE_QUESTION,
     payload: q,
