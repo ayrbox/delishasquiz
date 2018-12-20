@@ -24,7 +24,10 @@ export const ACTIONS = {
   GET_SETTINGS_SUCCESS,
 };
 
-export const generateQuestion = () => ({ type: GENERATE_QUESTION });
+export const generateQuestion = payload => ({
+  type: GENERATE_QUESTION,
+  payload,
+});
 
 export const receiveQuestion = payload => ({
   type: RECEIVE_QUESTION,

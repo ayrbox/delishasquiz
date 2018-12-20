@@ -24,8 +24,12 @@ export const isValidOperator = (operator) => {
 /**
  * @func mathsquiz/core/isValidQuestion
  * @desc validates if question is valid for quiz or not */
-export const isValidQuestion = (question) => {
+export const isValidQuestion = (question, digitUbound = 10) => {
   const { operator, digit1, digit2 } = question;
+
+  if (digit1 > digitUbound || digit2 > digitUbound) {
+    return false;
+  }
 
   if (operator === OPERATORS.ADDITION) {
     return digit1 >= 0 && digit2 >= 0;
@@ -42,8 +46,10 @@ export const isValidQuestion = (question) => {
   if (operator === OPERATORS.MULTIPLICATION) {
     return digit1 >= 0 && digit2 >= 0;
   }
+
   return false;
 };
+
 
 /**
  * @func mathsquiz/core/add
@@ -79,24 +85,25 @@ export const getRandomInt = max => Math.floor(Math.random() * Math.floor(max));
 /**
  * @func mathsquiz/core/getRandomOperator
  */
-export const getRandomOperator = () => {
-  const optIndex = getRandomInt(4);
-
-  const operatorArray = Object.keys(OPERATORS).map(k => OPERATORS[k]);
-  const opt = operatorArray[optIndex];
-  return opt;
+export const getRandomOperator = (operators) => {
+  if (!Array.isArray(operators)) throw new Error('Expected operators to be an array');
+  const optIndex = getRandomInt(operators.length);
+  return operators[optIndex];
 };
 
 /**
  * @func mathsquiz/core/getQuestion
  * @desc returns question object with random number and operator
  */
-export const getQuestion = (optr) => {
-  if (optr && !isValidOperator(optr)) {
-    throw new Error('Invalid operator');
+export const getQuestion = (operators, ubound) => {
+  if (!Array.isArray(operators)) throw new Error('Expected operators to be an array');
+
+  const invalidOperator = operators.find(o => !isValidOperator(o));
+  if (invalidOperator) {
+    throw new Error(`Invalid operator ${invalidOperator}`);
   }
 
-  const operator = optr || getRandomOperator();
+  const operator = getRandomOperator(operators);
   const q = {
     digit1: 0,
     digit2: 0,
@@ -107,7 +114,7 @@ export const getQuestion = (optr) => {
     q.digit1 = getRandomInt(20);
     q.digit2 = getRandomInt(20);
   }
-  while (!isValidQuestion(q));
+  while (!isValidQuestion(q, ubound));
   return q;
 };
 
@@ -134,7 +141,7 @@ export const getAnswer = ({ operator, ...digits }) => {
  *
  * @desc returns array of question objects
  */
-export const getQuestions = (numberOfQuestions, operator) => {
-  if (operator && !isValidOperator(operator)) throw new Error('Invalid operator');
-  return [...Array(numberOfQuestions)].map(() => getQuestion(operator));
+export const getQuestions = (level, operators, numberOfQuestions) => {
+  const ubound = level * 10;
+  return [...Array(numberOfQuestions)].map(() => getQuestion(operators, ubound));
 };

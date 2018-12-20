@@ -14,10 +14,26 @@ describe('core question', () => {
   });
 
   describe('#get Randrom Operator', () => {
-    it('returns one of operator', () => {
-      const operatorArray = Object.keys(OPERATORS).map(k => OPERATORS[k]);
-      const randomOperator = questions.getRandomOperator();
-      expect(operatorArray).toContain(randomOperator);
+    it('returns one of operator from array', () => {
+      const operatorSets = [
+        ['+', '-', '/', 'x'],
+        ['+', '-'],
+        ['/', 'x'],
+        ['-', '/', '+'],
+        ['x', '+', '/'],
+      ];
+      operatorSets.forEach((set) => {
+        for (let count = 0; count <= 10; count += 1) {
+          const randomOperator = questions.getRandomOperator(set);
+          expect(set).toContain(randomOperator);
+        }
+      });
+    });
+
+    it('throws an exception on non array operators', () => {
+      expect(() => questions.getRandomOperator({ a: 'a', b: 'b' })).toThrow();
+      expect(() => questions.getRandomOperator('+')).toThrow();
+      expect(() => questions.getRandomOperator(100)).toThrow();
     });
   });
 
@@ -36,36 +52,55 @@ describe('core question', () => {
   });
 
   describe('#isValidQuestion', () => {
-    it('returns false', () => {
-      console.log('TODO Valid question'); // eslint-disable-line
+    describe('when digits are greater than ubound', () => {
+      it('throws error on second digit greater', () => {
+        expect(questions.isValidQuestion({
+          digit1: 20,
+          digit2: 30,
+          operator: 'x',
+        }, 20)).toBe(false);
+      });
+
+      it('throws error on first digit great', () => {
+        expect(questions.isValidQuestion({
+          digit1: 11,
+          digit2: 5,
+          operator: '+',
+        }, 10)).toBe(false);
+      });
     });
 
-    it('returns true', () => {
-      console.log('TODO Valid quesitons'); // eslint-disable-line
+    describe('when digit are under ubound', () => {
+      it('returns true on valid questions', () => {
+        expect(questions.isValidQuestion({
+          digit1: 12,
+          digit2: 8,
+          operator: 'x',
+        }, 20)).toBe(true);
+      });
     });
   });
 
   describe('#get question', () => {
     it('returns question object', () => {
-      const newQuestion = questions.getQuestion();
+      const newQuestion = questions.getQuestion(['+', '-', '/', 'x']);
       expect(newQuestion).toBeInstanceOf(Object);
     });
 
     it('returns invalid operator', () => {
-      // console.log(questions.getQuestion('%'));
-      expect(() => questions.getQuestion('%')).toThrow();
+      expect(() => questions.getQuestion(['%'])).toThrow();
     });
 
     it('SUBSTRACTION: first digit must be greater than second', () => {
       for (let idx = 0; idx < 100; idx += 1) {
-        const q = questions.getQuestion(OPERATORS.SUBSTRACTION);
+        const q = questions.getQuestion([OPERATORS.SUBSTRACTION]);
         expect(q.digit1).toBeGreaterThanOrEqual(q.digit2);
       }
     });
 
     it('DIVISION: first digit must be division without remainder', () => {
       for (let idx = 0; idx < 100; idx += 1) {
-        const q = questions.getQuestion(OPERATORS.DIVISION);
+        const q = questions.getQuestion([OPERATORS.DIVISION]);
         expect((q.digit1 % q.digit2)).toEqual(0);
       }
     });
@@ -73,7 +108,7 @@ describe('core question', () => {
 
   describe('#get questions', () => {
     it('returns array of questions', () => {
-      const q = questions.getQuestions(100);
+      const q = questions.getQuestions(1, ['+', '-', 'x', '/'], 100);
       expect(Array.isArray(q)).toBe(true);
       expect(q.length).toEqual(100);
     });

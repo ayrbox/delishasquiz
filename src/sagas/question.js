@@ -3,14 +3,16 @@ import { getQuestions, getAnswer } from '../core/questions';
 
 import {
   ACTIONS,
-  // receiveQuestion,
-  // checkAnswer,
-  // receiveResult
 } from '../actions';
 
-function* generateQuestions() {
+function* generateQuestions(action) {
   const { RECEIVE_QUESTION } = ACTIONS;
-  const q = yield getQuestions(20);
+  const { level, operatorSettings, questionsPerQuiz } = action.payload;
+
+  const operators = operatorSettings.filter(o => o.selected).map(o => o.key);
+  // yield console.log(level, operators, questionsPerQuiz);
+
+  const q = yield getQuestions(level, operators, questionsPerQuiz);
   yield put({
     type: RECEIVE_QUESTION,
     payload: q,

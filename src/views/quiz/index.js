@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import { generateQuestion, submitAnswer } from '../../actions';
 import Quiz from './quiz';
 
-const mapState = state => ({
-  questions: state.questions,
+const mapState = ({ settings, questions }) => ({
+  questions,
+  settings,
 });
 
 export default connect(mapState, {

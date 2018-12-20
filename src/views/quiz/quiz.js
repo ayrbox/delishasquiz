@@ -19,8 +19,9 @@ class Quiz extends Component {
   }
 
   componentDidMount() {
-    const { generateQuestion } = this.props;
-    generateQuestion();
+    const { generateQuestion, settings } = this.props;
+    const { level, operatorSettings, questionsPerQuiz } = settings;
+    generateQuestion({ level, operatorSettings, questionsPerQuiz });
   }
 
   componentDidUpdate() {
@@ -154,6 +155,7 @@ Quiz.propTypes = {
     }),
   ).isRequired,
   history: PropTypes.shape.isRequired,
+  settings: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default Quiz;
