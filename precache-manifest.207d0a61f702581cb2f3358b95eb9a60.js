@@ -8,15 +8,15 @@ self.__precacheManifest = [
     "url": "/mathsquiz/static/js/runtime~main.7f5728cd.js"
   },
   {
-    "revision": "a35058720568bb9cd00e",
-    "url": "/mathsquiz/static/js/main.a3505872.chunk.js"
+    "revision": "3b5bf21473e34ea51a2a",
+    "url": "/mathsquiz/static/js/main.3b5bf214.chunk.js"
   },
   {
     "revision": "2f0cc866b127d0f16185",
     "url": "/mathsquiz/static/js/1.2f0cc866.chunk.js"
   },
   {
-    "revision": "a35058720568bb9cd00e",
+    "revision": "3b5bf21473e34ea51a2a",
     "url": "/mathsquiz/static/css/main.f5df03d1.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/mathsquiz/static/css/1.35279cec.chunk.css"
   },
   {
-    "revision": "8471d6f505e0fde3684efe7cd5d67409",
+    "revision": "2821c01a70c62650e4c4d12e9c4bc902",
     "url": "/mathsquiz/index.html"
   }
 ];
