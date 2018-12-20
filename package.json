@@ -2,7 +2,7 @@
   "name": "mathsquiz",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://ayrbox.github.io/mathsquiz",
+  "homepage" : "https://ayrbox.github.io/mathsquiz/",
   "dependencies": {
     "@babel/core": "7.1.0",
     "@svgr/webpack": "2.4.1",

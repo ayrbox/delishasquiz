@@ -17,7 +17,7 @@ import store from './store';
 
 const App = () => (
   <Provider store={store}>
-    <Router>
+    <Router basename="/mathsquiz">
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/game" component={Quiz} />
