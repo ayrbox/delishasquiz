@@ -10,7 +10,7 @@ const Landing = () => (
       <h1>Welcome to Maths Quiz</h1>
 
       <div className="row justify-content-center">
-        <div className="col-1">
+        <div className="col-12 col-sm-4 col-md-1">
           <Link
             to="/game"
             className="btn btn-primary btn-lg"
@@ -18,7 +18,7 @@ const Landing = () => (
             Game
           </Link>
         </div>
-        <div className="col-1">
+        <div className="col-12 col-sm-4 col-md-1">
           <Link
             to="/settings"
             className="btn btn-warning btn-lg"
