@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mathsquiz/precache-manifest.442d53c316c2f4ac19ab9fc78bd8899c.js"
+  "/mathsquiz/precache-manifest.5c04d921b763f8c28b46f59e1b87bb47.js"
 );
 
 workbox.clientsClaim();
